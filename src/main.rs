@@ -1,5 +1,5 @@
 pub mod components;
-use crate::components::TodoList;
+use crate::components::todolist::TodoList;
 use yew::prelude::*;
 
 struct App {
