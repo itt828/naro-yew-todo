@@ -3,6 +3,7 @@ use web_sys::HtmlInputElement;
 use yew::prelude::*;
 pub struct TodoList {
     todos: Vec<String>,
+    completed_todos: Vec<String>,
     todo: String,
 }
 pub enum Msg {
@@ -16,6 +17,7 @@ impl Component for TodoList {
     fn create(ctx: &Context<Self>) -> Self {
         Self {
             todos: vec![],
+            completed_todos: vec![],
             todo: String::new(),
         }
     }
@@ -45,10 +47,26 @@ impl Component for TodoList {
                 <button onclick={ctx.link().callback(move |_| {
                     Msg::AddTodoList
                 })}>{"登録"}</button>
+                <h2>{"タスク一覧"}</h2>
+                <h3>{"完"}</h3>
+                <ul>
+                    {for self.completed_todos.iter().map(|todo| {
+                        html! {
+                            <li>
+                            {todo}
+                            </li>
+
+                        }
+                    })}
+                </ul>
+                <h3>{"未完"}</h3>
                 <ul>
                     {for self.todos.iter().map(|todo| {
                         html! {
-                            <li>{todo}</li>
+                            <li>
+                            {todo}
+                            </li>
+
                         }
                     })}
                 </ul>
