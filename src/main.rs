@@ -2,27 +2,18 @@ pub mod components;
 use crate::components::todolist::TodoList;
 use yew::prelude::*;
 
-struct App {
-    value: i64,
-}
+struct App {}
 
-enum Msg {
-    AddOne,
-}
+enum Msg {}
 
 impl Component for App {
     type Message = Msg;
     type Properties = ();
     fn create(ctx: &Context<Self>) -> Self {
-        Self { value: 0 }
+        Self {}
     }
     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
-        match msg {
-            Msg::AddOne => {
-                self.value += 1;
-                true
-            }
-        }
+        match msg {}
     }
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
