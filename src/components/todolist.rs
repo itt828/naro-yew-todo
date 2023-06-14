@@ -9,6 +9,7 @@ pub struct TodoList {
 pub enum Msg {
     UpdateTodo(String),
     AddTodoList,
+    CompleteTodo(usize),
 }
 
 impl Component for TodoList {
@@ -30,6 +31,11 @@ impl Component for TodoList {
             Msg::AddTodoList => {
                 self.todos.push(self.todo.clone());
                 self.todo = String::new();
+                true
+            }
+            Msg::CompleteTodo(idx) => {
+                let todo = self.todos.remove(idx);
+                self.completed_todos.push(todo);
                 true
             }
         }
@@ -61,10 +67,13 @@ impl Component for TodoList {
                 </ul>
                 <h3>{"未完"}</h3>
                 <ul>
-                    {for self.todos.iter().map(|todo| {
+                    {for self.todos.iter().enumerate().map(|(idx,todo)| {
                         html! {
                             <li>
                             {todo}
+                            <button onclick={ctx.link().callback(move |_| {
+                                Msg::CompleteTodo(idx)
+                            })}>{"完了する"}</button>
                             </li>
 
                         }
