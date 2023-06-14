@@ -1,3 +1,5 @@
+pub mod components;
+use crate::components::TodoList;
 use yew::prelude::*;
 
 struct App {
@@ -25,13 +27,7 @@ impl Component for App {
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
             <div>
-                <div>
-                    <button onclick={ctx.link().callback(|_|Msg::AddOne)}>{"+1"}</button>
-                </div>
-                <div>
-                    {"おいすー"}
-                    {format!("カウント: {}",self.value)}
-                </div>
+                <TodoList></TodoList>
             </div>
         }
     }
